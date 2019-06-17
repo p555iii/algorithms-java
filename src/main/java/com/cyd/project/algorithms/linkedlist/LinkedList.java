@@ -1,6 +1,9 @@
 package com.cyd.project.algorithms.linkedlist;
 
 
+import java.awt.*;
+import java.util.Objects;
+
 public class LinkedList<E> {
 
     private Node<E> first;
@@ -60,6 +63,17 @@ public class LinkedList<E> {
         return (E) res.e;
     }
 
+    public void reverse(){
+        Node node = first.next.next;
+        reverses(node);
+    }
+
+    private void reverses(Node node){
+        if(node.next == null){
+            first.next = node;
+        }
+    }
+
     /*public void set(E e, int index){
         if (index < 0 || index >= size) {
             throw new IllegalArgumentException("不支持操作");
@@ -105,6 +119,40 @@ public class LinkedList<E> {
 
     public E removeLast() {
         return remove(size - 1);
+    }
+
+    public void removeElements(Node head, int val) {
+        Node prev = new Node(null,head);
+        Node cur = head;
+        while (cur != null){
+            if(Objects.equals(cur.e,val)){
+                prev.next = cur.next;
+                cur = cur.next;
+            }else {
+                prev = prev.next;
+                cur = cur.next;
+            }
+        }
+
+    }
+
+    /**
+     * you   bug
+     * @param e
+     */
+    public void removeElement(E e){
+        Node<E> cur = first.next;
+        Node<E> prev = first;
+
+        while (cur != null){
+            if(Objects.equals(cur.e,e)){
+                prev.next = cur.next;
+                cur = cur.next;
+            }else {
+                prev = prev.next;
+                cur = cur.next;
+            }
+        }
     }
 
     public boolean contains(E e) {

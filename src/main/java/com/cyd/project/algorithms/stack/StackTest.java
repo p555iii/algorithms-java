@@ -1,17 +1,25 @@
 package com.cyd.project.algorithms.stack;
 
+import org.junit.Test;
+
 import java.util.stream.IntStream;
 
 public class StackTest {
-    public static void main(String[] args) {
-        LinkedStack arrayStack = new LinkedStack();
+
+    @Test
+    public void invertedLinkedList(){
+        LinkedStack linkedStack = new LinkedStack();
         IntStream.range(0,10).forEach(num->{
-            arrayStack.push(num);
-            arrayStack.print();
+            linkedStack.push(num);
+
         });
+        linkedStack.print();
+        LinkedStack linkedStack2 = new LinkedStack();
         IntStream.range(0,10).forEach(num->{
-            arrayStack.pop();
-            arrayStack.print();
+            linkedStack2.push(linkedStack.pop());
+
         });
+        linkedStack2.print();
     }
+
 }
