@@ -39,6 +39,7 @@ public class BinarySearchTree<E extends Comparable<E>> {
      * 树向左向右递归会变成更小的一棵树，所有如果树的左孩子或者右孩子都不为空 那么就还能往下递归
      * 这时 去比较 e和 node.e的大小关系，如果e < node.e 向树的左边递归 否则向右递归
      * 当左孩子或者右孩子有一个为空时 就找到了 对应的位置
+     * 这里 貌似有问题  == null的情况没判断 大小就直接插入 有问题
      * @param e
      * @param node
      */

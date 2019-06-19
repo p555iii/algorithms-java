@@ -54,8 +54,19 @@ public class LinkedListTest {
         LinkedList<Integer> linkedList2 = new LinkedList<>();
         IntStream.range(0,10).forEach(num->{
             // O(1)
-            linkedList.addFirst(linkedList2.removeFirst());
+            linkedList2.addFirst(linkedList.removeFirst());
         });
         linkedList2.print();
+    }
+
+    @Test
+    public void addres(){
+        LinkedList<Integer> linkedList = new LinkedList<>();
+        linkedList.add2(1,0);
+        linkedList.print();
+        linkedList.add2(2,1);
+        linkedList.print();
+        linkedList.add2(3,2);
+        linkedList.print();
     }
 }

@@ -15,11 +15,47 @@ public class LinkedList<E> {
     }
 
     public void addFirst(E e) {
-        add(e, 0);
+        add2(e, 0);
     }
 
     public void addLast(E e) {
-        add(e, size);
+        add2(e, size);
+    }
+
+    public void add2(E e, int index) {
+        if (index == 0) {
+            Node<E> cur = first.next;
+            Node<E> eNode = new Node<>(e);
+            first.next = eNode;
+            eNode.next = cur;
+            size++;
+            return;
+        }
+        add(e, index, first.next);
+    }
+
+    /**
+     * 递归 add
+     * @param e
+     * @param index
+     * @param node
+     * @return
+     */
+    public Node<E> add(E e, int index, Node node) {
+        // 如果是添加到末尾
+        if (index == 0 && node == null) {
+            size++;
+            return new Node<>(e);
+        }
+        // 如果是添加到非末尾
+        if (index == 0) {
+            this.size++;
+            Node newNode = new Node(e);
+            newNode.next = node;
+            return newNode;
+        }
+        node.next =  add(e, index - 1, node.next);
+        return node;
     }
 
     public void add(E e, int index) {
@@ -63,13 +99,13 @@ public class LinkedList<E> {
         return (E) res.e;
     }
 
-    public void reverse(){
+    public void reverse() {
         Node node = first.next.next;
         reverses(node);
     }
 
-    private void reverses(Node node){
-        if(node.next == null){
+    private void reverses(Node node) {
+        if (node.next == null) {
             first.next = node;
         }
     }
@@ -122,13 +158,13 @@ public class LinkedList<E> {
     }
 
     public void removeElements(Node head, int val) {
-        Node prev = new Node(null,head);
+        Node prev = new Node(null, head);
         Node cur = head;
-        while (cur != null){
-            if(Objects.equals(cur.e,val)){
+        while (cur != null) {
+            if (Objects.equals(cur.e, val)) {
                 prev.next = cur.next;
                 cur = cur.next;
-            }else {
+            } else {
                 prev = prev.next;
                 cur = cur.next;
             }
@@ -138,17 +174,18 @@ public class LinkedList<E> {
 
     /**
      * you   bug
+     *
      * @param e
      */
-    public void removeElement(E e){
+    public void removeElement(E e) {
         Node<E> cur = first.next;
         Node<E> prev = first;
 
-        while (cur != null){
-            if(Objects.equals(cur.e,e)){
+        while (cur != null) {
+            if (Objects.equals(cur.e, e)) {
                 prev.next = cur.next;
                 cur = cur.next;
-            }else {
+            } else {
                 prev = prev.next;
                 cur = cur.next;
             }
