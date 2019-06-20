@@ -30,6 +30,10 @@ public class LinkedQueue<E> implements Queue<E> {
         return first.e;
     }
 
+
+    public int getSize(){
+        return size;
+    }
     @Override
     public E poll() {
         if(size == 0){
