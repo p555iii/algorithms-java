@@ -6,6 +6,9 @@ import com.cyd.project.algorithms.queue.Queue;
 import com.cyd.project.algorithms.stack.LinkedStack;
 import com.cyd.project.algorithms.stack.Stack;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @Description 二分搜索树
  * @Author changyandong@e6yun.com
@@ -117,6 +120,13 @@ public class BinarySearchTree<E extends Comparable<E>> {
         root = removeMinValue(root);
     }
 
+    public Node minimum(Node node) {
+        if (node.left == null) {
+            return node;
+        }
+        return minimum(node.left);
+    }
+
     private Node removeMinValue(Node node) {
         if (node.left == null) {
             Node right = node.right;
@@ -127,6 +137,54 @@ public class BinarySearchTree<E extends Comparable<E>> {
         }
         node.left = removeMinValue(node.left);
         return node;
+    }
+
+    public void remove(E e){
+        root = remove(root,e);
+    }
+
+
+    /**
+     * 删除树上任意节点
+     *                核心思路就是找到需要删除的节点元素的节点
+     *                如果他不同时包含左右子树 那么就直接删除他并且让他的子树成为他
+     *                如果他同时包含左右子树 那么就
+     * @param node
+     * @param e
+     * @return
+     */
+    private Node remove(Node node, E e) {
+        if(node == null){
+            return null;
+        }
+        if(e.compareTo(node.e) > 0){
+            node.right = remove(node.right,e);
+            return node;
+        }else if(e.compareTo(node.e) < 0){
+            node.left = remove(node.left,e);
+            return node;
+        }else{
+
+            if(node.right == null){
+                Node nodeLeft = node.left;
+                node.left = null;
+                size--;
+                return nodeLeft;
+            }
+
+            if(node.left == null){
+                Node nodeRight = node.right;
+                node.right = null;
+                size--;
+                return nodeRight;
+            }
+
+            Node successor = minimum(node);
+            successor.right = removeMinValue(node);
+            successor.left = node.left;
+            node.left = node.right = null;
+            return successor;
+        }
     }
 
     /**
@@ -268,5 +326,20 @@ public class BinarySearchTree<E extends Comparable<E>> {
         System.out.println();
         binarySearchTree.removeLessValue();
         binarySearchTree.queue();
+        List<String> list = new ArrayList<>();
+        list.add("1");
+        list.add("2");
+        for (String item : list) {
+            if ("2".equals(item)) {
+                list.remove(item);
+            }
+        }
+
+        for (int i = 0; i < list.size(); i++) {
+            String item = list.get(i);
+            if ("2".equals(item)) {
+                list.remove(item);
+            }
+        }
     }
 }
