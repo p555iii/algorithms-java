@@ -20,6 +20,15 @@ public class MyArrayList<T> {
         modifyCount = 0;
     }
 
+    public MyArrayList(T[] arr) {
+        data = new Object[arr.length];
+        for(int i = 0; i < arr.length; i++){
+            data[i] =arr[i];
+        }
+        size = arr.length;
+
+    }
+
     public void addLast(T t) {
         addIndex(t, size);
     }
@@ -182,5 +191,11 @@ public class MyArrayList<T> {
         }
         sb.append("]");
         return sb.toString();
+    }
+
+    public void swap(int i, int j) {
+        T value = (T)data[i];
+        data[i] = data[j];
+        data[j] = value;
     }
 }
